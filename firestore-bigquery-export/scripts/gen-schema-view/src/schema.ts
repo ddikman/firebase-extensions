@@ -113,7 +113,7 @@ export class FirestoreBigQuerySchemaViewFactory {
     const changeLogSchemaViewName = changeLog(
       schema(tableNamePrefix, schemaName)
     );
-    const latestSchemaViewName = latest(schema(tableNamePrefix, schemaName));
+    const latestSchemaViewName = tableNamePrefix // latest(schema(tableNamePrefix, schemaName));
     const dataset = this.bq.dataset(datasetId);
 
     const udfNames = Object.keys(udfs);
@@ -173,7 +173,7 @@ export class FirestoreBigQuerySchemaViewFactory {
 
     bigQueryFields = result.fields;
     const latestOptions = {
-      friendlyName: latestSchemaViewName,
+      friendlyName: tableNamePrefix,
       view: result.viewInfo,
     };
     if (!latestSchemaViewExists) {
